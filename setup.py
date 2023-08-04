@@ -4,12 +4,12 @@ from Cython.Build import cythonize
 import numpy, os, sys
 
 if sys.platform == 'darwin':
-    os.environ['CFLAGS']   = '-DGGML_USE_ACCELERATE -O3 -std=gnu11'
-    os.environ['CXXFLAGS'] = '-DGGML_USE_ACCELERATE -O3 -std=c++11'
+    os.environ['CFLAGS']   = '-DWHISPER_OPENVINO=1 -DGGML_USE_ACCELERATE -O3 -std=gnu11'
+    os.environ['CXXFLAGS'] = '-DWHISPER_OPENVINO=1 -DGGML_USE_ACCELERATE -O3 -std=c++11'
     os.environ['LDFLAGS']  = '-framework Accelerate'
 else:
-    os.environ['CFLAGS']   = '-mavx -mavx2 -mfma -mf16c -O3 -std=gnu11'
-    os.environ['CXXFLAGS'] = '-mavx -mavx2 -mfma -mf16c -O3 -std=c++11'
+    os.environ['CFLAGS']   = '-DWHISPER_OPENVINO=1 -mavx -mavx2 -mfma -mf16c -O3 -std=gnu11'
+    os.environ['CXXFLAGS'] = '-DWHISPER_OPENVINO=1 -mavx -mavx2 -mfma -mf16c -O3 -std=c++11'
 
 ext_modules = [
     Extension(
